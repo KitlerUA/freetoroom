@@ -50,7 +50,7 @@ func (d *DBMock) GetAllRooms() ([]hotel.Room, error){
 
 func (d *DBMock) CheckAccount(username, password string) (bool, error) {
 	if username == "kitler" && password == "e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4" {
-		return false, fmt.Errorf("bad credential")
+		return true, nil
 	}
-	return true, nil
+	return false, fmt.Errorf("bad credential")
 }

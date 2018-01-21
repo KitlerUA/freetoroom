@@ -1,6 +1,9 @@
 package handlers
 
-import "github.com/labstack/echo"
+import (
+	"github.com/labstack/echo"
+	"github.com/KitlerUA/freetoroom/db"
+)
 
 type AbstractHandler interface {
 	AddRoom(c echo.Context) error
@@ -12,5 +15,5 @@ type AbstractHandler interface {
 }
 
 type Handler struct {
-
+	DB db.AbstractDB
 }

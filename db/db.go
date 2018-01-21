@@ -1,8 +1,7 @@
 package db
 
-import "github.com/jinzhu/gorm"
 import (
-	"sync"
+	"github.com/jinzhu/gorm"
 
 	"time"
 
@@ -24,21 +23,21 @@ func (d *GormDB) Connect() error {
 	return err
 }
 
-func AddRoom(room int, name string) error {
-	return db.Create(&hotel.Room{Room: room, Name: name}).Error
+func (d *GormDB) AddRoom(room int, name string) error {
+	return d.db.Create(&hotel.Room{Room: room, Name: name}).Error
 }
 
-func UpdateRoom(room int, name string) error {
-	return db.Model(&hotel.Room{}).Where("room = ?", room).Update("name", name).Error
+func (d *GormDB) UpdateRoom(room int, name string) error {
+	return d.db.Model(&hotel.Room{}).Where("room = ?", room).Update("name", name).Error
 }
 
-func DeleteRoom(room int) error {
-	return db.Unscoped().Where("room = ?", room).Delete(&hotel.Room{}).Error
+func (d *GormDB) DeleteRoom(room int) error {
+	return d.db.Unscoped().Where("room = ?", room).Delete(&hotel.Room{}).Error
 }
 
-func GetAllRooms() ([]hotel.Room, error) {
+func (d *GormDB) GetAllRooms() ([]hotel.Room, error) {
 	var res []hotel.Room
-	rows, err := db.Raw("select * from rooms").Rows()
+	rows, err := d.db.Raw("select * from rooms").Rows()
 	if err != nil {
 		return res, err
 	}
@@ -54,14 +53,14 @@ func GetAllRooms() ([]hotel.Room, error) {
 	return res, nil
 }
 
-func CheckAccount(username, password string) (bool, error) {
+func (d *GormDB) CheckAccount(username, password string) (bool, error) {
 	account := &hotel.Account{}
-	if err := db.Where("username = ? and password = ?", username, password).First(account).Error;err!=nil{
+	if err := d.db.Where("username = ? and password = ?", username, password).First(account).Error;err!=nil{
 		return false, err
 	}
 	return true, nil
 }
 
-func Close() error {
-	return db.Close()
+func (d *GormDB) Close() error {
+	return d.db.Close()
 }

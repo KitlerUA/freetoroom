@@ -6,16 +6,15 @@ import (
 	"time"
 
 	"github.com/labstack/echo"
-	"github.com/KitlerUA/freetoroom/db"
 	"crypto/sha1"
 	"encoding/hex"
 )
 
-func Login(c echo.Context) error {
+func (h *Handler) Login(c echo.Context) error {
 	username := c.FormValue("username")
 	password := c.FormValue("password")
 	sh := sha1.Sum([]byte(password))
-	ok, err := db.CheckAccount(username, hex.EncodeToString(sh[:]))
+	ok, err := h.DB.CheckAccount(username, hex.EncodeToString(sh[:]))
 	if err!=nil{
 		return c.HTML(http.StatusUnauthorized, err.Error())
 	}
@@ -33,7 +32,7 @@ func Login(c echo.Context) error {
 	return c.HTML(http.StatusUnauthorized, "Wrong credential")
 }
 
-func Logout(c echo.Context) error {
+func (h *Handler) Logout(c echo.Context) error {
 	cookie := &http.Cookie{}
 	cookie.Name = "sessionID"
 	cookie.Value = "deleted"

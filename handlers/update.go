@@ -3,12 +3,11 @@ package handlers
 import (
 	"strconv"
 
-	"github.com/KitlerUA/freetoroom/db"
 	"github.com/labstack/echo"
 	"net/http"
 )
 
-func Update(c echo.Context) error {
+func (h *Handler) Update(c echo.Context) error {
 	room := c.FormValue("room")
 	if room == "" {
 		return c.HTML(http.StatusBadRequest, "parameter 'room' not found")
@@ -24,7 +23,7 @@ func Update(c echo.Context) error {
 		return c.HTML(http.StatusBadRequest, "parameter 'client' not found")
 	}
 
-	if err = db.UpdateRoom(int(roomInt), client); err != nil {
+	if err = h.DB.UpdateRoom(int(roomInt), client); err != nil {
 		return c.HTML(501, "Cannot update room: "+err.Error())
 	}
 

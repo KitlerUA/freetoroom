@@ -10,7 +10,7 @@ import (
 func (h *Handler) AddRoom(c echo.Context) error {
 	room := c.FormValue("room")
 	if room == "" {
-		return c.HTML(http.StatusBadRequest, "parameter 'room' not found")
+		return c.String(http.StatusBadRequest, "parameter 'room' not found")
 	}
 	var roomInt int64
 	var err error

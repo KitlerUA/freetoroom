@@ -20,7 +20,7 @@ func (h *Handler) Delete(c echo.Context) error {
 	}
 
 	if err = h.DB.DeleteRoom(int(roomInt)); err != nil {
-		return c.HTML(501, "Cannot delete room: "+err.Error())
+		return c.HTML(http.StatusInternalServerError, "Cannot delete room: "+err.Error())
 	}
 	return c.HTML(http.StatusOK, "Room "+strconv.Itoa(int(roomInt))+" was deleted")
 }

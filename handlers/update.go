@@ -24,7 +24,7 @@ func (h *Handler) Update(c echo.Context) error {
 	}
 
 	if err = h.DB.UpdateRoom(int(roomInt), client); err != nil {
-		return c.HTML(501, "Cannot update room: "+err.Error())
+		return c.HTML(http.StatusInternalServerError, "Cannot update room: "+err.Error())
 	}
 
 	return c.HTML(http.StatusOK, "Room "+strconv.Itoa(int(roomInt))+" was changed")

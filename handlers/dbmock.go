@@ -7,6 +7,7 @@ import (
 
 type DBMock struct {
 	DB map[string]map[int]string
+	DBAccounts map[string]map[string]string
 }
 
 func (d *DBMock) AddRoom(room int, name string) error {
@@ -48,6 +49,8 @@ func (d *DBMock) GetAllRooms() ([]hotel.Room, error){
 }
 
 func (d *DBMock) CheckAccount(username, password string) (bool, error) {
-	//account := &hotel.Account{}
+	if username == "kitler" && password == "e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4" {
+		return false, fmt.Errorf("bad credential")
+	}
 	return true, nil
 }

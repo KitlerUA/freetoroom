@@ -10,7 +10,7 @@ import (
 func (h *Handler) GetAll(c echo.Context) error {
 	records, err := h.DB.GetAllRooms()
 	if err != nil {
-		return c.HTML(501, "Cannot get records: "+err.Error())
+		return c.HTML(http.StatusInternalServerError, "Cannot get records: "+err.Error())
 	}
 	s := ""
 	for i := range records {

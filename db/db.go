@@ -36,7 +36,10 @@ func (d *GormDB) UpdateRoom(room int, name string) error {
 }
 
 func (d *GormDB) DeleteRoom(room int) error {
-	return d.db.Unscoped().Where("room = ?", room).Delete(&hotel.Room{}).Error
+	if d.db.Unscoped().Where("room = ?", room).Delete(&hotel.Room{}).RowsAffected == 0 {
+		return fmt.Errorf("record not found")
+	}
+	return nil
 }
 
 func (d *GormDB) GetAllRooms() ([]hotel.Room, error) {

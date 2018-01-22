@@ -7,6 +7,7 @@ import (
 
 	"github.com/KitlerUA/freetoroom/hotel"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"fmt"
 )
 
 var db *gorm.DB
@@ -15,9 +16,9 @@ func Get(d *GormDB) *gorm.DB {
 	return d.db
 }
 
-func (d *GormDB) Connect() error {
+func (d *GormDB) Connect(address string) error {
 	var err error
-	d.db, err = gorm.Open("sqlite3", "db/hotel")
+	d.db, err = gorm.Open("sqlite3", address)
 	d.db.AutoMigrate(&hotel.Room{})
 	d.db.AutoMigrate(&hotel.Account{})
 	return err
@@ -28,7 +29,10 @@ func (d *GormDB) AddRoom(room int, name string) error {
 }
 
 func (d *GormDB) UpdateRoom(room int, name string) error {
-	return d.db.Model(&hotel.Room{}).Where("room = ?", room).Update("name", name).Error
+	if d.db.Model(&hotel.Room{}).Where("room = ?", room).Update("name", name).RowsAffected == 0 {
+		return fmt.Errorf("record not found")
+	}
+	return nil
 }
 
 func (d *GormDB) DeleteRoom(room int) error {

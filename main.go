@@ -14,7 +14,7 @@ func main() {
 	//connect to db
 	dataBase := db.GormDB{}
 
-	if err := dataBase.Connect(); err != nil {
+	if err := dataBase.Connect("db/hotel"); err != nil {
 		log.Fatalf("Cannot create db connections: %s", err)
 	}
 	defer dataBase.Close()

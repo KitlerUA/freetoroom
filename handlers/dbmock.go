@@ -41,11 +41,7 @@ func (d *DBMock) GetAllRooms() ([]hotel.Room, error){
 	for i := range d.DB["rooms"] {
 		res = append(res, hotel.Room{Room: i,Name:d.DB["rooms"][i]})
 	}
-	if len(d.DB["rooms"]) > 0 {
-		return res, nil
-	} else {
-		return res, fmt.Errorf("empty result")
-	}
+	return res, nil
 }
 
 func (d *DBMock) CheckAccount(username, password string) (bool, error) {

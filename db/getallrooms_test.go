@@ -61,9 +61,8 @@ func TestGormDB_GetAllRooms_Empty(t *testing.T) {
 		testLocal := test
 		t.Run(testLocal.name, func(t *testing.T){
 			t.Parallel()
-			if _, err := database.GetAllRooms(); err != nil{
-				t.Errorf("Expected error , got %s", err)
-
+			if rooms, err := database.GetAllRooms(); err != nil || rooms != nil {
+				t.Errorf("Expected nil-slice , got %v with error %s",rooms, err)
 			}
 		})
 	}

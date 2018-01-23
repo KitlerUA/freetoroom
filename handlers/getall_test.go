@@ -29,8 +29,8 @@ func TestHandler_GetAll(t *testing.T) {
 			req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 			rec := httptest.NewRecorder()
 			c := e.NewContext(req, rec)
-			if err := h.GetAll(c); c.Response().Status != testLocal.expected{
-				t.Errorf("Expected %s , got %s. Err %s", testLocal.expected, c.Response().Status, err)
+			if _ = h.GetAll(c); c.Response().Status != testLocal.expected{
+				t.Errorf("Expected %d , got %d", testLocal.expected, c.Response().Status)
 			}
 		})
 	}

@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+//GetAll - return list of reserved rooms
 func (h *Handler) GetAll(c echo.Context) error {
 	records, err := h.DB.GetAllRooms()
 	if err != nil {

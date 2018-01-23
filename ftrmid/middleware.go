@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo"
 )
 
+//CheckCookie - check if cookie exists and contains correct token value
 func CheckCookie(h echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		cookie, err := c.Cookie("sessionID")

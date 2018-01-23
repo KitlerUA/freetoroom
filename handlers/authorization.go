@@ -10,6 +10,7 @@ import (
 	"encoding/hex"
 )
 
+//Login - if user exists, create cookie with token
 func (h *Handler) Login(c echo.Context) error {
 	username := c.FormValue("username")
 	password := c.FormValue("password")
@@ -32,6 +33,7 @@ func (h *Handler) Login(c echo.Context) error {
 	return c.HTML(http.StatusUnauthorized, "Wrong credential")
 }
 
+//Login - delete cookie
 func (h *Handler) Logout(c echo.Context) error {
 	cookie := &http.Cookie{}
 	cookie.Name = "sessionID"

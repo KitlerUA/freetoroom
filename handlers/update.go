@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+//Update - update existing room reservation
 func (h *Handler) Update(c echo.Context) error {
 	room := c.FormValue("room")
 	if room == "" {

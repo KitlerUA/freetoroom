@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+//Delete - remove room from list
 func (h *Handler) Delete(c echo.Context) error {
 	room := c.FormValue("room")
 	if room == "" {

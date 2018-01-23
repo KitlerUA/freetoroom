@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+//AddRoom - reserve room in hotel
 func (h *Handler) AddRoom(c echo.Context) error {
 	room := c.FormValue("room")
 	if room == "" {

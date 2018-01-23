@@ -36,7 +36,7 @@ func TestHandler_Login(t *testing.T) {
 			req.Form.Add("password", testLocal.password)
 			c := e.NewContext(req, rec)
 			if _ = h.Login(c); c.Response().Status != testLocal.expected{
-				t.Errorf("Expected %s , got %s", testLocal.expected, c.Response().Status)
+				t.Errorf("Expected %d , got %d", testLocal.expected, c.Response().Status)
 			}
 		})
 	}

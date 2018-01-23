@@ -33,7 +33,7 @@ func (h *Handler) Login(c echo.Context) error {
 	return c.HTML(http.StatusUnauthorized, "Wrong credential")
 }
 
-//Login - delete cookie
+//Logout - delete cookie
 func (h *Handler) Logout(c echo.Context) error {
 	cookie := &http.Cookie{}
 	cookie.Name = "sessionID"

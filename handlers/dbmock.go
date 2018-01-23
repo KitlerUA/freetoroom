@@ -15,29 +15,26 @@ type DBMock struct {
 func (d *DBMock) AddRoom(room int, name string) error {
 	if _, ok := d.DB["rooms"][room];ok{
 		return fmt.Errorf("already exist")
-	} else {
-		d.DB["rooms"][room] = name
-		return nil
 	}
+	d.DB["rooms"][room] = name
+	return nil
 }
 
 //UpdateRoom - mock for UpdateRoom method
 func (d *DBMock) UpdateRoom(room int, name string) error {
 	if _, ok := d.DB["rooms"][room];!ok{
 		return fmt.Errorf("not exist")
-	} else {
-		d.DB["rooms"][room] = name
-		return nil
 	}
+	d.DB["rooms"][room] = name
+	return nil
 }
 
 //DeleteRoom - mock for DeleteRoom method
 func (d *DBMock) DeleteRoom(room int) error {
 	if _, ok := d.DB["rooms"][room];!ok{
 		return fmt.Errorf("not exist")
-	} else {
-		return nil
 	}
+	return nil
 }
 
 //GetAllRooms - mock for GetAllRooms method

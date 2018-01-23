@@ -40,7 +40,7 @@ func TestHandler_AddRoom(t *testing.T) {
 			req.Form.Add("client", testLocal.client)
 			c := e.NewContext(req, rec)
 			if _ = h.AddRoom(c); c.Response().Status != testLocal.expected{
-				t.Errorf("Expected %s , got %s", testLocal.expected, c.Response().Status)
+				t.Errorf("Expected %d , got %d", testLocal.expected, c.Response().Status)
 			}
 		})
 	}

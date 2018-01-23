@@ -2,6 +2,7 @@ package hotel
 
 import "github.com/jinzhu/gorm"
 
+//Account - represent user (admin user) in database
 type Account struct {
 	gorm.Model
 

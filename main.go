@@ -8,12 +8,13 @@ import (
 	"github.com/KitlerUA/freetoroom/db"
 	"github.com/KitlerUA/freetoroom/ftrmid"
 	"github.com/KitlerUA/freetoroom/handlers"
+	"fmt"
+	"github.com/KitlerUA/freetoroom/config"
 )
 
 func main() {
 	//connect to db
 	dataBase := db.GormDB{}
-
 	if err := dataBase.Connect("db/hotel"); err != nil {
 		log.Fatalf("Cannot create db connections: %s", err)
 	}
@@ -34,5 +35,5 @@ func main() {
 	adminGroup.GET("/room", h.GetAll)
 
 	//start Server
-	e.Start(":1323")
+	e.Start(fmt.Sprintf(":%s", config.Get().Port))
 }
